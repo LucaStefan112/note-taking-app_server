@@ -3,7 +3,7 @@ const ValidationError = require('joi').ValidationError
 const fsPromises = require('fs').promises
 const express = require('express')
 const { MESSAGES, PORT, PATHS } = require('./config')
-const { NOTE_SCHEMA, ID_SCHEMA } = require('./validations')
+const { NOTE_SCHEMA, ID_SCHEMA, NAME_SCHEMA } = require('./validations')
 const { error } = require('console')
 
 const app = express();
@@ -23,7 +23,9 @@ const dataToString = data => {
 
 //Headers for CORS compatibility
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*').setHeader('content-type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    .setHeader('Content-Type', 'application/json')
+    .setHeader('Access-Control-Allow-Headers', '*');
     next();
 });
 
@@ -48,7 +50,7 @@ app.post(PATHS.NEW_NOTE, async (req, res) => {
     let data = [];
 
     // Validating the incoming payload:
-    const {value, error} = NOTE_SCHEMA.validate(req.body)
+    const {value, error} = NAME_SCHEMA.validate(req.body)
 
     if(error){
         res.send(MESSAGES.BAD_REQUEST).status(400);
@@ -59,6 +61,7 @@ app.post(PATHS.NEW_NOTE, async (req, res) => {
 
     // Creating the new id:
     payload.id = new Date().getTime();
+    payload.content = '';
 
     // Getting the content from db:
     try{
@@ -131,5 +134,7 @@ app.delete(PATHS.REMOVE_NOTE, async (req, res) => {
 
 // Non-existing routes:
 app.get('*', (req, res) => res.send(MESSAGES.NOT_FOUND).status(404));
+
+console.log(`listening on port ${PORT}...`);
 
 app.listen(PORT);
