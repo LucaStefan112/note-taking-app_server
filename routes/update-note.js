@@ -8,7 +8,7 @@ const { dataToString } = require('../utils')
 
 // Routing /update-note
 updateNoteRoute.route('/')
-    .put( async (req, res) => {
+    .post( async (req, res) => {
         let data = [];
 
         // Validating the incoming payload:
