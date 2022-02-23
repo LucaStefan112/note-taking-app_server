@@ -5,8 +5,9 @@ exports.MESSAGES = {
 };
 
 exports.PATHS = {
-    GET_NOTES: "/notes",
+    NOTES: "/notes",
     NEW_NOTE: "/new-note",
+    UPDATE_NOTE: "/update-note",
     REMOVE_NOTE: "/remove-note"
 }
 
