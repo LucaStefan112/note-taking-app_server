@@ -46,7 +46,7 @@ updateNoteRoute.route('/')
         }
 
         // Sending the data back to client:
-        res.send(data).status(200)
+        res.json(data).status(200)
         return;
     })
 

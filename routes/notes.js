@@ -10,7 +10,7 @@ notesRouter.route('/').
     get(async (req, res) => {
         try{
             const data = await fsPromises.readFile('data.json', 'utf8');
-            res.send(JSON.parse(data)).status(200);
+            res.json(JSON.parse(data)).status(200);
         } catch (err) {
             console.log(err)
             res.send(MESSAGES.SERVER_ERROR).status(500)
