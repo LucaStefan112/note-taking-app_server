@@ -50,6 +50,9 @@ newNoteRoute.route('/')
             return;
         }
 
+        // client and payload:
+        console.log("New note: ", req.body, "\nfrom: ", req.rawHeaders[19], '\n');
+
         // Sending the data back to client:
         res.json(data).status(200)
         return;

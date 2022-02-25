@@ -8,7 +8,7 @@ const { dataToString } = require('../utils')
 
 // Routing /update-note
 updateNoteRoute.route('/')
-    .post( async (req, res) => {
+    .put( async (req, res) => {
         let data = [];
 
         // Validating the incoming payload:
@@ -44,6 +44,9 @@ updateNoteRoute.route('/')
             res.send(MESSAGES.SERVER_ERROR).status(500)
             return;
         }
+
+        // client and payload:
+        console.log("Update note: ", req.body, "\nfrom: ", req.rawHeaders[19], '\n');
 
         // Sending the data back to client:
         res.json(data).status(200)

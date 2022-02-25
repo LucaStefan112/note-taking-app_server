@@ -7,7 +7,9 @@ const { PORT, PATHS, MESSAGES } = require('./config')
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
     .setHeader('Content-Type', 'application/json')
-    .setHeader('Access-Control-Allow-Headers', '*');
+    .setHeader('Access-Control-Allow-Headers', '*')
+    .setHeader('Access-Control-Allow-Methods', '*');
+
     next();
 });
 
@@ -30,5 +32,5 @@ app.use(PATHS.REMOVE_NOTE, removeNoteRoute);
 // Non-existing routes:
 app.get('*', (req, res) => res.send(MESSAGES.NOT_FOUND).status(404));
 
-console.log(`listening on port ${PORT}...`);
+console.log(`listening on port ${PORT}...\n`);
 app.listen(PORT);
