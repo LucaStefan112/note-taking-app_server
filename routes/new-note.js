@@ -4,7 +4,6 @@ const fsPromises = require('fs').promises
 const { MESSAGES } = require('../config')
 const Joi = require('joi')
 const { NAME_SCHEMA } = require('../validations')
-const { dataToString } = require('../utils')
 
 // Routing /new-note
 newNoteRoute.route('/')
@@ -48,7 +47,7 @@ newNoteRoute.route('/')
 
         // Writing the data to db:
         try{
-            let content = dataToString(data);
+            let content = JSON.stringify(data);
             await fsPromises.writeFile('data.json', content);
         } catch (err) {
             console.log(err)
