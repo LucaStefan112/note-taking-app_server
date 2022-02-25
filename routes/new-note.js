@@ -37,6 +37,12 @@ newNoteRoute.route('/')
             return;
         }
 
+        for(let i in data)
+            if(data[i].name == payload.name){
+                res.send(MESSAGES.BAD_REQUEST).status(400);
+                return;
+            }
+
         // Pushing the new note:
         data.push(payload);
 
