@@ -44,7 +44,7 @@ removeNoteRoute.route('/').delete(async (req, res) => {
     }
 
     // client and payload:
-    console.log("Remove note: ", req.body, "\nfrom: ", req.rawHeaders[19], '\n');
+    console.log("Removing note: ", req.body, "\nfrom: ", req.rawHeaders[19], '\n');
 
     // Sending the data back to client:
     res.json(data).status(200)
